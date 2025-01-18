@@ -105,33 +105,20 @@ Create a 'PredatorAI' script similar to how we created the 'PlayerMovement' scri
 ```csharp
 public class PredatorAI : MonoBehaviour
 {
-    public float minSpeed = 3f;
-    public float maxSpeed = 7f;
-    private Transform player;
-    private Rigidbody2D rb;
-    
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-    }
-    
-    void Update()
-    {
-        Vector2 direction = (player.position - transform.position).normalized;
-        float currentSpeed = Random.Range(minSpeed, maxSpeed);
-        rb.velocity = direction * currentSpeed;
-    }
-    
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Vector2 bounceDirection = (collision.transform.position - transform.position).normalized;
-            collision.gameObject.transform.position += (Vector3)(bounceDirection * 3);
-            GameManager.Instance.DecrementLives();
-        }
-    }
+    public float moveSpeed = 2f;
+    private Vector2 moveDirection;
+    private Transform player;
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        moveDirection = (player.position - transform.position).normalized;
+    }
+
+    void Update()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+    }
 }
 ```
 
