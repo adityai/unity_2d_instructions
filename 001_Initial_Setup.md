@@ -10,7 +10,6 @@
    - Rename it to "Player"
    - Add Rigidbody2D component with gravity scale set to 0[1]
    - Add CircleCollider2D component[1]
-   - Set constraints to freeze rotation on Z-axis[1]
 
 **Predator Setup**
 1. Create a square sprite:
@@ -18,7 +17,6 @@
    - Rename it to "Predator"
    - Add Rigidbody2D component with gravity scale set to 0
    - Add BoxCollider2D component
-   - Set constraints to freeze rotation on Z-axis
 
 **Goody Setup**
 1. Create a diamond shape:
@@ -28,6 +26,24 @@
    - Add BoxCollider2D and set "Is Trigger" to true
 
 ## Scripts
+
+1. Select the Player object in the Hierarchy.
+
+2. Right Click on Assets -> Select 'Create' -> Select 'C# Script'
+
+3. Name the script 'PlayerMovement' and double click the script object.
+
+4. The script file will open in Visual Studio Code or a default text editor.
+
+5. Edit the script file with the following code.
+
+6. Save the script and go back to the Unity screen.
+
+7. Unity will load the script and compile it into the game.
+
+8. Drag the 'PlayerMovement' script object onto the 'Player' object.
+
+9. Run the game and use the up, down, right and left keys to verify that the Player object is moving as expected.
 
 **Player Movement Script**
 ```csharp
@@ -47,6 +63,36 @@ public class PlayerMovement : MonoBehaviour
         float moveY = Input.GetAxisRaw("Vertical");
         
         rb.velocity = new Vector2(moveX * moveSpeed, moveY * moveSpeed);
+    }
+}
+```
+
+**Game Manager Script**
+```csharp
+public class GameManager : MonoBehaviour
+{
+    public static GameManager Instance;
+    public int lives = 3;
+    public int score = 0;
+    
+    void Awake()
+    {
+        Instance = this;
+    }
+    
+    public void DecrementLives()
+    {
+        lives--;
+        if (lives <= 0)
+        {
+            GameOver();
+        }
+    }
+    
+    private void GameOver()
+    {
+        Time.timeScale = 0;
+        // Add game over UI logic here
     }
 }
 ```
@@ -81,36 +127,6 @@ public class PredatorAI : MonoBehaviour
             collision.gameObject.transform.position += (Vector3)(bounceDirection * 3);
             GameManager.Instance.DecrementLives();
         }
-    }
-}
-```
-
-**Game Manager Script**
-```csharp
-public class GameManager : MonoBehaviour
-{
-    public static GameManager Instance;
-    public int lives = 3;
-    public int score = 0;
-    
-    void Awake()
-    {
-        Instance = this;
-    }
-    
-    public void DecrementLives()
-    {
-        lives--;
-        if (lives <= 0)
-        {
-            GameOver();
-        }
-    }
-    
-    private void GameOver()
-    {
-        Time.timeScale = 0;
-        // Add game over UI logic here
     }
 }
 ```

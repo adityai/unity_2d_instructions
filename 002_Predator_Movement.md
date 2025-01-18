@@ -1,7 +1,7 @@
 To make the predator move at random speeds in Unity, you can modify the predator's movement script using Random.Range to generate random speed values. Here's how to implement it:
 
 ```csharp
-public class PredatorMovement : MonoBehaviour
+public class PredatorAI : MonoBehaviour
 {
     public float minSpeed = 3f;
     public float maxSpeed = 8f;
