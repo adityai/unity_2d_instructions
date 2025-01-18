@@ -27,6 +27,7 @@
 
 ## Scripts
 
+**Player Movement Script**
 1. Select the Player object in the Hierarchy.
 
 2. Right Click on Assets -> Select 'Create' -> Select 'C# Script'
@@ -45,7 +46,6 @@
 
 9. Run the game and use the up, down, right and left keys to verify that the Player object is moving as expected.
 
-**Player Movement Script**
 ```csharp
 public class PlayerMovement : MonoBehaviour
 {
@@ -68,6 +68,8 @@ public class PlayerMovement : MonoBehaviour
 ```
 
 **Game Manager Script**
+Create a script named 'GameManager' update the following code in it. There is no need to associate this script to any object in the game.
+
 ```csharp
 public class GameManager : MonoBehaviour
 {
@@ -98,6 +100,8 @@ public class GameManager : MonoBehaviour
 ```
 
 **Predator AI Script**
+Create a 'PredatorAI' script similar to how we created the 'PlayerMovement' script and associate it to the 'Predator' object.
+
 ```csharp
 public class PredatorAI : MonoBehaviour
 {
@@ -132,6 +136,8 @@ public class PredatorAI : MonoBehaviour
 ```
 
 **Goody Script**
+Similarly, create a 'Goody' script and associate it with the Goody object.
+
 ```csharp
 public class Goody : MonoBehaviour
 {
